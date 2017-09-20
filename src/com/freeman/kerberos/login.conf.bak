@@ -1,0 +1,16 @@
+spnego-client {
+	com.sun.security.auth.module.Krb5LoginModule required
+	storeKey=true
+	useKeyTab=true
+	KeyTab=Q04706.keytab
+	principal=Q04706;
+	useTicketCache=true;
+};
+
+spnego-server {
+	com.sun.security.auth.module.Krb5LoginModule required
+	storeKey=true
+	useKeyTab=true
+	KeyTab=Q04706.keytab
+	principal=Q04706;
+};

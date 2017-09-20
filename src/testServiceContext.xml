@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+           http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
+           http://www.springframework.org/schema/aop 
+           http://www.springframework.org/schema/aop/spring-aop-2.0.xsd
+           http://www.springframework.org/schema/tx 
+           http://www.springframework.org/schema/tx/spring-tx-2.0.xsd">
+<!--
+	<bean id="s21DS" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="url" value="jdbc:oracle:thin:@//10.68.202.33:1668/CCIDEV.cusa.canon.com" />
+		<property name="driverClassName" value="oracle.jdbc.OracleDriver" />
+		<property name="username" value="S21_CCI_POC" />
+		<property name="password" value="s21cci1" />
+	</bean>
+	
+	<bean id="s21DS" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="url" value="jdbc:as400:CCITEST" />
+		<property name="driverClassName" value="com.ibm.as400.access.AS400JDBCDriver" />
+		<property name="username" value="tr01" />
+		<property name="password" value="tr01" />
+	</bean>
+-->
+	<bean id="s21DS" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="url" value="jdbc:sqlserver://10.124.5.148:1433;databaseName=InetCA" />
+		<property name="driverClassName" value="com.microsoft.sqlserver.jdbc.SQLServerDriver" />
+		<property name="username" value="inet_admin" />
+		<property name="password" value="6390Dixie" />
+	</bean>
+
+	<!-- Use Hibernate transaction manager -->
+	<bean id="txManager"
+		class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<!-- Hibernate SessionFactory -->
+	<bean id="defaultLobHandler" class="org.springframework.jdbc.support.lob.DefaultLobHandler"
+		lazy-init="true" />
+
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+		<property name="dataSource" ref="s21DS"></property>
+		<property name="lobHandler" ref="defaultLobHandler" />
+		<property name="mappingLocations">
+			<list>
+				<value>classpath*:ca/canon/contentmgmt/model/impl/*.hbm.xml</value>
+			</list>
+		</property>
+		<!-- Database Dialect -->
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">
+				<!--  
+					org.hibernate.dialect.Oracle10gDialect
+					org.hibernate.dialect.DB2Dialect
+				-->	
+					org.hibernate.dialect.SQLServerDialect
+				</prop>
+				<!-- Batch updates are not processing exceptions correctly -->
+				<!--prop key="hibernate.jdbc.batch_size">0</prop -->
+				<prop key="hibernate.bytecode.use_reflection_optimizer">
+					false
+				</prop>
+				<prop key="hibernate.show_sql">true</prop>
+				<prop key="hibernate.max_fetch_depth">3</prop>
+				<prop key="hibernate.use_outer_join">true</prop>
+				<prop key="hibernate.current_session_context_class">thread</prop>
+				<prop key="hibernate.transaction.factory_class">org.hibernate.transaction.JDBCTransactionFactory
+				</prop>
+			</props>
+		</property>
+	</bean>
+	<tx:advice id="txAdvice" transaction-manager="txManager">
+		<tx:attributes>
+			<tx:method name="get*" propagation="REQUIRED" rollback-for="Exception" />
+			<tx:method name="find*" propagation="REQUIRED"
+				rollback-for="Exception" />
+			<tx:method name="load*" propagation="REQUIRED"
+				rollback-for="Exception" />
+			<tx:method name="save*" propagation="REQUIRED" />
+			<tx:method name="insert*" propagation="REQUIRED"
+				no-rollback-for="Exception" />
+			<tx:method name="remove*" propagation="REQUIRED" />
+			<tx:method name="add*" propagation="REQUIRED"
+				no-rollback-for="Exception" />
+			<tx:method name="*" propagation="REQUIRED" />
+		</tx:attributes>
+	</tx:advice>
+
+	<aop:config proxy-target-class="true">
+		<aop:advisor pointcut="execution(* ca.canon.inet.service.*.*(..))"
+			advice-ref="txAdviceCA" />
+	</aop:config>
+
+	<bean id="entityDao" class="ca.canon.inet.dao.EntityDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<bean id="inetService" class="ca.canon.inet.service.InetServiceImpl">
+		<property name="entityDao" ref="entityDao"></property>
+	</bean>
+
+</beans>
+
+

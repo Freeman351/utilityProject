@@ -1,0 +1,358 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+           http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
+           http://www.springframework.org/schema/aop 
+           http://www.springframework.org/schema/aop/spring-aop-2.0.xsd
+           http://www.springframework.org/schema/tx 
+           http://www.springframework.org/schema/tx/spring-tx-2.0.xsd">
+            
+<bean id="monerisCodesWrapperEN"  class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
+        <property name="staticMethod" value="ca.canon.estore.service.MonerisPaymentServiceImpl.setMonerisCodes_en"/>
+            <property name="arguments">
+            <list>
+                <map>
+					<entry key="000" value="Approved, Account Balances Included" />
+					<entry key="001" value="Approved, Account Balances Not Included" />
+					<entry key="002" value="Approved, Country Club" />
+					<entry key="003" value="Approved, Maybe More ID" />
+					<entry key="004" value="Approved, Pending ID (Sign Paper Draft)" />
+					<entry key="005" value="Approved, Blind" />
+					<entry key="006" value="Approved, VIP" />
+					<entry key="007" value="Approved, Administrative Transaction" />
+					<entry key="008" value="Approved, National NEG File Hit OK" />
+					<entry key="009" value="Approved, Commercial" />
+					<entry key="023" value="Amex - Credit Authorization"/>
+					<entry key="024" value="Amex 77 - Credit" />
+					<entry key="025" value="Amex - Credit Authorization" />
+					<entry key="026" value="Amex - Credit Authorization" />
+					<entry key="027" value="Credit Card Authorization" />
+					<entry key="028" value="VIP Credit Approved" />
+					<entry key="029" value="Credit Response Acknowledgement" />
+					<entry key="050" value="Decline, Re-Try, Cannot Process" />
+					<entry key="051" value="Expired Card" />
+					<entry key="052" value="PIN Retries Exceeded" />
+					<entry key="053" value="No Sharing,  Re-Try, Cannot Process" />
+					<entry key="054" value="No Security Module" />
+					<entry key="055" value="Invalid Transaction" />
+					<entry key="056" value="No Support" />
+					<entry key="057" value="Lost Or Stolen Card" />
+					<entry key="058" value="Invalid Status" />
+					<entry key="059" value="Restricted Card" />
+					<entry key="060" value="No Chequing/Savings Account" />
+					<entry key="061" value="No PBF, Card Is Not Set Up" />
+					<entry key="062" value="PBF Update Error, Re-Try" />
+					<entry key="063" value="Invalid Authorization Type" />
+					<entry key="064" value="Bad TRACK 2" />
+					<entry key="065" value="Adjustment Not Allowed" />
+					<entry key="066" value="Invalid Credit Card Advance Increment" />
+					<entry key="067" value="Invalid Transaction Date" />
+					<entry key="068" value="PTLF Error" />
+					<entry key="069" value="Bad Message Error" />
+					<entry key="070" value="No IDF, Invalid Card" />
+					<entry key="071" value="Invalid Route Authorization" />
+					<entry key="072" value="Card On National NEG File" />
+					<entry key="073" value="Invalid Route Service (Destination)" />
+					<entry key="074" value="Unable To Authorize" />
+					<entry key="75" value="Invalid PAN Length" />
+					<entry key="76" value="Low Funds" />
+					<entry key="77" value="Pre-Auth Full" />
+					<entry key="78" value="Duplicate Transaction" />
+					<entry key="79" value="Maximum Online Refund" />
+					<entry key="80" value="Maximum Offline Refund Reached" />
+					<entry key="81" value="Maximum Credit Per Refund Reached" />
+					<entry key="82" value="Number Of Times Used Exceeded" />
+					<entry key="83" value="Maximum Refund Credit Reached" />
+					<entry key="84" value="Duplicate Transaction" />
+					<entry key="85" value="Inquiry Not Allowed" />
+					<entry key="86" value="Over Floor Limit" />
+					<entry key="87" value="Maximum Number Of Refund" />
+					<entry key="88" value="Place Call, Re-Try" />
+					<entry key="89" value="CAF Status Inactive Or Closed" />
+					<entry key="90" value="Referral File Full" />
+					<entry key="91" value="NEG File Problem" />
+					<entry key="92" value="Advance Less Than Minimum" />
+					<entry key="93" value="Delinquent" />
+					<entry key="94" value="Over Table Limit" />
+					<entry key="95" value="Amount Over Maximum" />
+					<entry key="96" value="PIN Required" />
+					<entry key="97" value="Invalid Card" />
+					<entry key="98" value="Force Post" />
+					<entry key="99" value="Bad PBF" />
+					<entry key="100" value="Unable To Process Transaction - Invalid Request" />
+					<entry key="101" value="Place Call" />
+					<entry key="102" value="Place Call" />
+					<entry key="103" value="NEG File Problem" />
+					<entry key="104" value="CAF Problem" />
+					<entry key="105" value="Card Not Supported" />
+					<entry key="106" value="Amount Over Maximum" />
+					<entry key="107" value="Over Daily Limit" />
+					<entry key="108" value="CAF Problem" />
+					<entry key="109" value="Advance Less Than Minimum" />
+					<entry key="110" value="Number Of Times Used Exceeded" />
+					<entry key="111" value="Delinquent" />
+					<entry key="112" value="Over Table Limit" />
+					<entry key="113" value="Time-out" />
+					<entry key="115" value="PTLF Error" />
+					<entry key="121" value="Administration File Problem" />
+					<entry key="122" value="Unable To Validate PIN: Security Module Down" />
+					<entry key="150" value="Merchant Not On File" />
+					<entry key="200" value="Invalid Account" />
+					<entry key="201" value="Incorrect PIN" />
+					<entry key="202" value="Advance Less Than Minimum" />
+					<entry key="203" value="Administrative Card Needed" />
+					<entry key="204" value="Amount Over Maximum" />
+					<entry key="205" value="Invalid Advance Amount" />
+					<entry key="206" value="CAF Not Found" />
+					<entry key="207" value="Invalid Transaction Date" />
+					<entry key="208" value="Invalid Expiration Date" />
+					<entry key="209" value="Invalid Transaction Code" />
+					<entry key="210" value="PIN Key Sync Error" />
+					<entry key="212" value="Destination Not Available" />
+					<entry key="251" value="Error On Cash Amount" />
+					<entry key="252" value="Debit Not Supported" />
+					<entry key="426" value="AMEX - Denial 12" />
+					<entry key="427" value="AMEX - Invalid Merchant" />
+					<entry key="429" value="AMEX - Account Error" />
+					<entry key="430" value="AMEX - Expired Card" />
+					<entry key="431" value="AMEX - Call Amex" />
+					<entry key="434" value="AMEX - Call03" />
+					<entry key="435" value="AMEX - System Down" />
+					<entry key="436" value="AMEX - Call05" />
+					<entry key="437" value="AMEX - Declined, Call" />
+					<entry key="438" value="AMEX - Declined, Call" />
+					<entry key="439" value="AMEX - Service Error" />
+					<entry key="440" value="AMEX - Call Amex" />
+					<entry key="441" value="AMEX - Amount Error" />
+					<entry key="475" value="CREDIT CARD ­ Invalid Expiration Date" />
+					<entry key="476" value="CREDIT CARD - Invalid Transaction, Rejected" />
+					<entry key="477" value="CREDIT CARD - Refer Call" />
+					<entry key="478" value="CREDIT CARD - Decline, Pick Up Card, Call" />
+					<entry key="479" value="CREDIT CARD - Decline, Pick Up Card" />
+					<entry key="480" value="CREDIT CARD - Decline, Pick Up Card" />
+					<entry key="481" value="CREDIT CARD - Decline" />
+					<entry key="482" value="CREDIT CARD - Expired Card" />
+					<entry key="483" value="CREDIT CARD - Refer" />
+					<entry key="484" value="CREDIT CARD - Expired Card Refer" />
+					<entry key="485" value="CREDIT CARD - Not Authorized" />
+					<entry key="486" value="CREDIT CARD - CVV Cryptographic Error" /> 
+					<entry key="487" value="CREDIT CARD - Invalid CVV" />
+					<entry key="489" value="CREDIT CARD - Invalid CVV" />
+					<entry key="490" value="CREDIT CARD - Invalid CVV" />
+					<entry key="800" value="Bad Format" />
+					<entry key="801" value="Bad Data" />
+					<entry key="802" value="Invalid Clerk ID" />
+					<entry key="809" value="Bad Close" />
+					<entry key="810" value="System Timeout No response from Moneris Host" />
+					<entry key="811" value="System Error" />
+					<entry key="821" value="Bad Response Length" />
+					<entry key="877" value="Invalid PIN Block" />
+					<entry key="878" value="PIN Length Error" />
+					<entry key="880" value="Final Response Packet of a Multi-Packet Transaction" />
+					<entry key="881" value="Continuation Response Packet of a Multi-Packet Transaction" />
+					<entry key="882" value="Download Aborted" />
+					<entry key="889" value="MAC Key Sync Error" />
+					<entry key="898" value="Bad MAC Value" />
+					<entry key="899" value="Bad Sequence number ­ Terminal must handle this internally" />
+					<entry key="900" value="Capture - PIN Tries Exceeded" />
+					<entry key="901" value="Capture - Expired Card" />
+					<entry key="902" value="Capture - NEG Capture" />
+					<entry key="903" value="Capture - CAF Status 3" />
+					<entry key="904" value="Capture - Advance less than Minimum" />
+					<entry key="905" value="Capture - Num Times Used" />
+					<entry key="906" value="Capture - Delinquent" />
+					<entry key="907" value="Capture - Over Limit Table" />
+					<entry key="908" value="Capture - Amount Over Maximum" />
+					<entry key="909" value="Capture - Capture" />
+					<entry key="960" value="Initialization Failure - No Match on Merchant ID" />
+					<entry key="961" value="Initialization Failure - No Match on PINPad" />
+					<entry key="962" value="Initialization Failure - No Match on Printer ID" />
+					<entry key="963" value="Initialization Failure - No Match on Poll Code" />
+					<entry key="964" value="Initialization Failure - No Match on Concentrator ID" />
+					<entry key="965" value="Invalid Software Version Number" />
+					<entry key="966" value="Duplicate Terminal Name" />
+					<entry key="970" value="Terminal/Clerk Table Full" />
+					<entry key="983" value="Clerk Totals Unavailable: selected" />
+					<entry key="989" value="MAC Error on Transaction 95 (initialization and Handshake)" />
+					<entry key="990" value="Chip Card declines a host approved transaction" />
+					<entry key="991" value="Chip Card removed before ICC" />
+				</map>
+            </list>
+        </property>
+</bean>
+       
+<bean id="monerisCodesWrapperFR"  class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
+        <property name="staticMethod" value="ca.canon.estore.service.MonerisPaymentServiceImpl.setMonerisCodes_fr"/>
+            <property name="arguments">
+            <list>
+                <map>
+					<entry key="000" value="Approuvé, Soldes de Comptes Inclus" />
+					<entry key="001" value="Approuvé, Soldes de Comptes Pas Inclus" />
+					<entry key="002" value="Approuvé, Country Club" />
+					<entry key="003" value="Approuvé, Maybe More ID" />
+					<entry key="004" value="Approuvé, ID en Attente (Signer Papier de Brouillon)" />
+					<entry key="005" value="Approuvé, Blind" />
+					<entry key="006" value="Approuvé, VIP" />
+					<entry key="007" value="Approuvé, Transaction Administrative" />
+					<entry key="008" value="Approuvé, Fichier National NEG Appuyez sur OK" />
+					<entry key="009" value="Approuvé, Commercial" />
+					<entry key="023" value="Amex - Autorisation de Crédit" />
+					<entry key="024" value="Amex 77 - Crédit" />
+					<entry key="025" value="Amex - Autorisation de Crédit" />
+					<entry key="026" value="Amex - Autorisation de Crédit" />
+					<entry key="027" value="Autorisation de Carte de Crédit" />
+					<entry key="028" value="Crédit VIP Approuvé" />
+					<entry key="029" value="Reconnaissance de Réponse de Crédit" />
+					<entry key="050" value="Refusé, Réessayez, Impossible de Traiter" />
+					<entry key="051" value="Carte Expirée" />
+					<entry key="052" value="Tentatives NIP Dépassé" />
+					<entry key="053" value="Pas de Partage, Réessayez, Impossible de Traiter" />
+					<entry key="054" value="Pas de Module de Sécurité" />
+					<entry key="055" value="Transaction Invalide" />
+					<entry key="056" value="Aucune Soutien" />
+					<entry key="057" value="Carte Perdue ou Volée" />
+					<entry key="058" value="Statut Invalide" />
+					<entry key="059" value="Carte Interdit" />
+					<entry key="060" value="Pas de Compte-Chèques / épargne" />
+					<entry key="061" value="Pas de PBF, Carte n'est pas Configuré" />
+					<entry key="062" value="Erreur mise à jour PBF, Réessayez" />
+					<entry key="063" value="Type d'autorisation Invalide" />
+					<entry key="064" value="Mauvais TRACK 2" />
+					<entry key="065" value="Ajustement Non Autorisés" />
+					<entry key="066" value="Incrément de Avance de Carte de Crédit Invalide" />
+					<entry key="067" value="Date de Transaction Invalide" />
+					<entry key="068" value="Erreur PTLF" />
+					<entry key="069" value="Mauvais Message d'erreur" />
+					<entry key="070" value="Pas de IDF, carte Non Valide" />
+					<entry key="071" value="Autorisation Route Non Valide" />
+					<entry key="072" value="Carte sur Fichier Nationale NEG" />
+					<entry key="073" value="Service de Route Non Valide (Destination)" />
+					<entry key="074" value="Impossible d'Autoriser" />
+					<entry key="75"  value="Longueur PAN Invalide" />
+					<entry key="76"  value="Fonds Bas" />
+					<entry key="77"  value="Préautorisation Plein" />
+					<entry key="78"  value="Transaction en Double" />
+					<entry key="79"  value="Remboursement Maximum En Ligne" />
+					<entry key="80"  value="Remboursement Maximum Hors Ligne Atteint " />
+					<entry key="81"  value="Crédit Maximum par Remboursement Atteint" />
+					<entry key="82"  value="Nombre d'utilisations dépassé" />
+					<entry key="83"  value="Remboursement de Crédit Maximum Atteint" />
+					<entry key="84"  value="Transaction en double" />
+					<entry key="85"  value="Enquête Non Permis" />
+					<entry key="86"  value="Au-Dessus du Limite du Plancher" />
+					<entry key="87"  value="Nombre Maximum de Remboursement" />
+					<entry key="88"  value="Passer un Appel, Réessayez" />
+					<entry key="89"  value="Statut CAF Inactif ou Fermé" />
+					<entry key="90"  value="Fichier de Renvoi Complet" />
+					<entry key="91"  value="Problème fichier NEG" />
+					<entry key="92"  value="Avance Moins que le Minimum" />
+					<entry key="93"  value="Délinquant" />
+					<entry key="94"  value="Au-Dessus de la Limite Tableau" />
+					<entry key="95"  value="Montant Au-Dessus du Maximum" />
+					<entry key="96"  value="NIP requis" />
+					<entry key="97"  value="Carte non valide" />
+					<entry key="99"  value="Mauvais PBF" />
+					<entry key="100" value="Impossible de Traiter Transaction - Demande Invalide" />
+					<entry key="101" value="Placez Appel" />
+					<entry key="102" value="Placez Appel" />
+					<entry key="103" value="Problème fichier NEG" />
+					<entry key="104" value="Problème CAF" />
+					<entry key="105" value="Carte Non Supporté" />
+					<entry key="106" value="Montant Au-Dessus du Maximum" />
+					<entry key="107" value="Au-Dessus de la Limite Quotidienne" />
+					<entry key="108" value="Problème CAF" />
+					<entry key="109" value="Avance Moins que le Minimum" />
+					<entry key="110" value="Nombre d'utilisations dépassé" />
+					<entry key="111" value="Délinquant" />
+					<entry key="112" value="Au-Dessus De La Limite Tableau" />
+					<entry key="113" value="Time-out" />
+					<entry key="115" value="Erreur PTLF" />
+					<entry key="121" value="Problème Fichier d'Administration" />
+					<entry key="122" value="Impossible de valider NIP: Module de Sécurité Non Disponible" />
+					<entry key="150" value="Marchand pas dans le dossier" />
+					<entry key="200" value="Compte Non Valide" />
+					<entry key="201" value="Code NIP Incorrect" />
+					<entry key="202" value="Avance Moins Que le Minimum" />
+					<entry key="203" value="Carte Administrative Requis" />
+					<entry key="204" value="Montant Au-Dessus du Maximum" />
+					<entry key="205" value="Montant d’Avance Invalide" />
+					<entry key="206" value="CAF Introuvable" />
+					<entry key="207" value="Date de Transaction Invalide" />
+					<entry key="208" value="Date d'Expiration Invalide" />
+					<entry key="209" value="Code de Transaction Invalide" />
+					<entry key="210" value="Erreur de Synchronisation Clé NIP" />
+					<entry key="212" value="Destination Non disponible" />
+					<entry key="251" value="Erreur sur Montant de Espèces" />
+					<entry key="252" value="Débit Non Supporté" />
+					<entry key="426" value="AMEX - Déni 12" />
+					<entry key="427" value="AMEX - Marchand Invalide" />
+					<entry key="429" value="AMEX - Erreur de Compte" />
+					<entry key="431" value="AMEX - Appellez Amex" />
+					<entry key="434" value="AMEX - Call03" />
+					<entry key="435" value="AMEX - Arrêt du Système" />
+					<entry key="436" value="AMEX - Call05" />
+					<entry key="437" value="AMEX - Refusée, Appelez" />
+					<entry key="438" value="AMEX - Refusée, Appelez" />
+					<entry key="439" value="AMEX - Erreur de Service" />
+					<entry key="440" value="AMEX - Appelez Amex" />
+					<entry key="441" value="AMEX – Erreur du Montant" />
+					<entry key="475" value="CARTE DE CRÉDIT - Date d'Expiration Invalide" />
+					<entry key="476" value="CARTE DE CRÉDIT - Transaction invalide, Rejeté" />
+					<entry key="477" value="CARTE DE CRÉDIT - Renvoyez Appel" />
+					<entry key="478" value="CARTE DE CRÉDIT - Refusée, Ramassez Carte, Appelez" />
+					<entry key="479" value="CARTE DE CRÉDIT - Refusée, Ramassez Carte" />
+					<entry key="480" value="CARTE DE CRÉDIT - Refusée, Ramassez Carte" />
+					<entry key="481" value="CARTE DE CRÉDIT - Refusée " />
+					<entry key="482" value="CARTE DE CRÉDIT - Carte Expirée" />
+					<entry key="483" value="CARTE DE CRÉDIT – Renvoyez" />
+					<entry key="484" value="CARTE DE CRÉDIT - Carte Expirée Renvoyez" />
+					<entry key="485" value="CARTE DE CRÉDIT - Non Autorisé" />
+					<entry key="486" value="CARTE DE CRÉDIT - Erreur de chiffrement CVV" />
+					<entry key="487" value="CARTE DE CRÉDIT – CVV Invalide" />
+					<entry key="489" value="CARTE DE CRÉDIT - CVV Invalide" />
+					<entry key="490" value="CARTE DE CRÉDIT - CVV Invalide" />
+					<entry key="800" value="Mauvais Format" />
+					<entry key="801" value="Mauvais Données" />
+					<entry key="802" value="ID de Commis Invalide" />
+					<entry key="809" value="Mauvais Fermeture" />
+					<entry key="810" value="Délai d'attente du système. Pas de réponse de l'hôte de Moneris" />
+					<entry key="811" value="Erreur système" />
+					<entry key="821" value="Mauvaise Longueur de la réponse" />
+					<entry key="877" value="Bloc NIP Invalide" />
+					<entry key="878" value="Erreur Longueur du NIP" />
+					<entry key="880" value="Paquet de Réponse final d'une opération Multi-Pacquet" />
+					<entry key="881" value="Paquet de Réponse Poursuite d'une opération Multi-Pacquet" />
+					<entry key="882" value="Téléchargement Abandonné" />
+					<entry key="889" value="Erreur MAC Key Sync" />
+					<entry key="898" value="Mauvais Valeur MAC" />
+					<entry key="899" value="Mauvais Numéro de séquence – Le Terminal doit gérer cela en interne" />
+					<entry key="900" value="Capture - Tentatives NIP Dépassé" />
+					<entry key="901" value="Capture - Carte Expiree" />
+					<entry key="902" value="Capture – Capture NEG" />
+					<entry key="903" value="Capture - CAF Status 3" />
+					<entry key="904" value="Capture - Avance Moins Que le Minimum" />
+					<entry key="905" value="Capture – Numeros de fois Utilisé" />
+					<entry key="906" value="Capture - Delinquent" />
+					<entry key="907" value="Capture – Au-Dessus De La Limite Tableau" />
+					<entry key="908" value="Capture - Montant Au-Dessus du Maximum" />
+					<entry key="909" value="Capture - Capturer" />
+					<entry key="960" value="Échec de l'initialisation - Pas de correspondance sur le ID du Marchand" />
+					<entry key="961" value="Échec de l'initialisation - Pas de correspondance sur clavier NIP" />
+					<entry key="962" value="Échec de l'initialisation - Pas de correspondance sur le ID de l'imprimante" />
+					<entry key="963" value="Échec de l'initialisation - Pas de correspondance sur le Code Sondage" />
+					<entry key="964" value="Échec de l'initialisation - Pas de correspondance sur l'ID concentrateur" />
+					<entry key="965" value="Numéro de Version Logicielle invalide" />
+					<entry key="966" value="Nom du Terminal Dupliqué" />
+					<entry key="970" value="Tableau Terminal / Commis complet" />
+					<entry key="983" value="Totaux des Commis non disponible: sélectionné" />
+					<entry key="989" value="Erreur MAC sur l'opération 95 (initialisation et établissement d’une liaison)" />
+					<entry key="990" value="Carte à puce décline une transaction approuvée par l’hôte" />
+					<entry key="991" value="Carte à puce enlevé avant ICCC" />
+				</map>
+            </list>
+        </property>
+</bean>
+ 
+</beans>

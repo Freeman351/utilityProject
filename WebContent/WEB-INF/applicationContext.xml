@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+		xmlns:aop="http://www.springframework.org/schema/aop"
+		xmlns:tx="http://www.springframework.org/schema/tx"
+		xsi:schemaLocation="http://www.springframework.org/schema/beans 
+           		http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
+           		http://www.springframework.org/schema/aop 
+           		http://www.springframework.org/schema/aop/spring-aop-2.0.xsd
+           		http://www.springframework.org/schema/tx 
+           		http://www.springframework.org/schema/tx/spring-tx-2.0.xsd">
+
+	<!--Begin of  Spring setup for restful web service client -->	
+    <bean id="oceDriverDownloadService" class="ca.canon.inet.service.download.driver.oce.OceDriverDownloadServiceImpl">
+        <property name="restTemplate" ref="restTemplate" />
+		<property name="baseURL" value="http://data.oce.com/lookup"/>
+    </bean>
+
+    <bean id="restTemplate" class="org.springframework.web.client.RestTemplate">
+    </bean>
+	<!--end of  Spring setup for restful web service client -->
+
+		
+	<!--Begin of  Spring setup for Quartz Batch job -->
+	
+	 <!-- Online call  -->	
+	<bean id="syncJob" class="com.freeman.batch.quartz.SyncJobAction" scope='request'>
+		<property name="service" ref="CCI21Service" />
+	</bean>
+
+	<!-- Quartz scheduler process -->
+	<bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+		<property name="triggers">
+			<list>
+				<ref local="caCronTrigger" />
+			</list>
+		</property>
+	</bean>
+	<bean id="caCronTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail">
+			<ref local="caJobDetail" />
+		</property>
+		<property name="cronExpression">
+			<value>0 0 22 * * ?</value>
+			<!-- or  <value>${cronBatchSchedulingJobTime}</value>  in CronTriggerBean.properties file -->
+		</property>
+	</bean>
+	<bean id="caJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref local="syncDataTaskCA" />
+		</property>
+		<property name="targetMethod">
+			<value>execute</value>
+		</property>
+	</bean>
+	<bean id="syncDataTaskCA" class="com.freeman.batch.quartz.DataSyncJob">
+		<property name="service" ref="CCI21Service" />
+	</bean>
+	
+	<!--end of Spring setup for Quartz Batch job -->
+	
+		
+	<!--Begin of Spring setup for JNDI/Hibernate/TxManager -->
+	<bean id="inetCADataSource" class="org.springframework.jndi.JndiObjectFactoryBean">
+		<property name="jndiName" value="java:/jdbc/inetCADB" />
+		<property name="cache" value="false" />
+		<property name="proxyInterface" value="javax.sql.DataSource" />
+	</bean>
+	<bean id="txManagerCA"
+		class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<bean id="defaultLobHandlerCA" class="org.springframework.jdbc.support.lob.DefaultLobHandler" lazy-init="true" />
+
+	<bean id="sessionFactory" class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+		<property name="dataSource" ref="inetCADataSource" />
+		<property name="lobHandler" ref="defaultLobHandlerCA" />
+		<property name="mappingLocations">
+			<list>
+				<value>classpath*:ca/canon/contentmgmt/model/impl/*.hbm.xml</value>
+			</list>
+		</property>
+		<!-- Database Dialect -->
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">org.hibernate.dialect.SQLServerDialect</prop>
+				<!-- Batch updates are not processing exceptions correctly -->
+				<!--prop key="hibernate.jdbc.batch_size">0</prop-->
+				<prop key="hibernate.bytecode.use_reflection_optimizer">false</prop>
+				<prop key="hibernate.show_sql">false</prop>
+				<prop key="hibernate.max_fetch_depth">3</prop>
+				<prop key="hibernate.use_outer_join">true</prop>
+				<prop key="hibernate.current_session_context_class">thread</prop>
+				<prop key="hibernate.transaction.factory_class">org.hibernate.transaction.JDBCTransactionFactory</prop>
+			</props>
+		</property>
+	</bean>
+	<!--end of  Spring setup for Quartz Batch job -->	
+	
+</beans>
